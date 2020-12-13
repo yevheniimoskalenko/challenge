@@ -1,0 +1,46 @@
+{
+  "name": "challengeforme",
+  "version": "1.0.0",
+  "description": "nuxt,vuex,express",
+  "author": "yevheniimoskalenko",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
+    "build": "nuxt build",
+    "start": "cross-env NODE_ENV=production node server/index.js",
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.3.6",
+    "axios": "^0.21.0",
+    "cors": "^2.8.5",
+    "cross-env": "^5.2.0",
+    "dotenv": "^8.2.0",
+    "element-ui": "^2.4.11",
+    "express": "^4.16.4",
+    "js-base64": "^3.6.0",
+    "liqpayjs-sdk": "^3.3.1",
+    "lodash": "^4.17.20",
+    "mongoose": "^5.9.16",
+    "node-telegram-bot-api": "^0.50.0",
+    "normalize.css": "^8.0.1",
+    "nuxt": "^2.0.0",
+    "sha1": "^1.1.1",
+    "vue-the-mask": "^0.11.1"
+  },
+  "devDependencies": {
+    "@nuxtjs/eslint-config": "^2.0.0",
+    "@nuxtjs/eslint-module": "^1.0.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^6.1.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-nuxt": ">=0.4.2",
+    "eslint-plugin-prettier": "^3.1.2",
+    "fibers": "^5.0.0",
+    "nodemon": "^1.18.9",
+    "prettier": "^1.19.1",
+    "sass": "^1.29.0",
+    "sass-loader": "^10.1.0"
+  }
+}
