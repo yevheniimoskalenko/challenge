@@ -1,31 +1,48 @@
 export const state = () => ({
-  Tasks: []
+  Tasks: [],
+  Work: []
 })
 export const mutations = {
   addTask(state, payload) {
-    state.Tasks.unshift(payload)
+    state.Tasks.unshift(payload) // добавлення завдання в початок завдань
   },
   deleteTask(state, payload) {
-    const s = state.Tasks.splice(payload, 1)
-    console.log(s)
+    state.Tasks.splice(payload, 1) // видалення завдання
+  },
+  addWork(state, payload) {
+    state.Work.push(payload)
   }
 }
 export const getters = {
-  tasks: (state) => state.Tasks
+  tasks: (state) => state.Tasks,
+  typeTask: (state) => {
+    const result = []
+    for (const i of state.Tasks) {
+      result.push({ value: i.action })
+    }
+    return result
+  }
 }
 export const actions = {
   async createTask({ commit }, payload) {
     try {
-      await commit('addTask', payload)
+      await commit('addTask', payload) // виклик завдання із мутацією
       // return await this.$axios.$post(`/api/exchange/`, payload)
     } catch (e) {
-      commit('SetStatus', e)
+      console.log(e)
       throw e
     }
   },
   async deleteTask({ commit }, payload) {
     try {
-      await commit('deleteTask', payload)
+      await commit('deleteTask', payload.item) // виклик завдання із мутацією
+    } catch (e) {
+      console.log(e)
+    }
+  },
+  async addWork({ commit }, payload) {
+    try {
+      await commit('addWork', payload)
     } catch (e) {
       console.log(e)
     }
