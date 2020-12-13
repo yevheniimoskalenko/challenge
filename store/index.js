@@ -1,28 +1,33 @@
 export const state = () => ({
-  status: null
+  Tasks: []
 })
 export const mutations = {
-  SetStatus(state, payload) {
-    state.status = payload
+  addTask(state, payload) {
+    state.Tasks.unshift(payload)
+  },
+  deleteTask(state, payload) {
+    const s = state.Tasks.splice(payload, 1)
+    console.log(s)
   }
 }
 export const getters = {
-  status: (state) => state.status
+  tasks: (state) => state.Tasks
 }
 export const actions = {
-  async exchangeValues({ commit }, payload) {
+  async createTask({ commit }, payload) {
     try {
-      return await this.$axios.$post(`/api/exchange/`, payload)
+      await commit('addTask', payload)
+      // return await this.$axios.$post(`/api/exchange/`, payload)
     } catch (e) {
       commit('SetStatus', e)
       throw e
     }
   },
-  async payCoin({ commit }, payload) {
+  async deleteTask({ commit }, payload) {
     try {
-      return await this.$axios.$post(`/api/pay/`, payload)
+      await commit('deleteTask', payload)
     } catch (e) {
-      commit('SetStatus', e)
+      console.log(e)
     }
   }
 }
