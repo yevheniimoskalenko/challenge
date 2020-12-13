@@ -66,7 +66,7 @@
     <div class="task_title">
       <h2>Мої завдання</h2>
     </div>
-    <div v-for="(task, index) in tasks" :key="index" class="task">
+    <div v-for="task in tasks" :key="task.id" class="task">
       <el-card>
         <div class="task-wrapper">
           <div class="task_active">
@@ -78,7 +78,7 @@
               type="danger"
               icon="el-icon-delete"
               circle
-              @click="deleteTask(index, task.id)"
+              @click="deleteTask(task.id)"
             />
           </div>
         </div>
@@ -170,8 +170,8 @@ export default {
       console.log(item)
     },
 
-    async deleteTask(item, id) {
-      await this.$store.dispatch('deleteTask', { item, id })
+    async deleteTask(id) {
+      await this.$store.dispatch('deleteTask', id)
     }
   },
   head() {

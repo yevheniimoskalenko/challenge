@@ -7,7 +7,10 @@ export const mutations = {
     state.Tasks.unshift(payload) // добавлення завдання в початок завдань
   },
   deleteTask(state, payload) {
-    state.Tasks.splice(payload, 1) // видалення завдання
+    state.Tasks.splice(
+      state.Tasks.findIndex((e) => e.id === payload),
+      1
+    )
   },
   addWork(state, payload) {
     state.Work.push(payload)
@@ -35,7 +38,7 @@ export const actions = {
   },
   async deleteTask({ commit }, payload) {
     try {
-      await commit('deleteTask', payload.item) // виклик завдання із мутацією
+      await commit('deleteTask', payload) // виклик завдання із мутацією
     } catch (e) {
       console.log(e)
     }
