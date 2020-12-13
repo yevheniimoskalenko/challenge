@@ -8,3 +8,27 @@ body {
   font-size: 16px;
   background: #f4f4f4;
 }
+.task-footer {
+  display: flex;
+  justify-content: center;
+}
+.el-button--primary.is-plain {
+  width: 100%;
+}
+.task-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.task {
+  padding: 10px 0;
+}
+.task_title {
+  padding: 20px 0px;
+
+  h2 {
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+  }
+}

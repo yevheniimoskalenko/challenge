@@ -1,19 +1,27 @@
+import { findLastIndex } from 'lodash'
 export const state = () => ({
   Tasks: [],
-  Work: []
+  Works: []
 })
 export const mutations = {
   addTask(state, payload) {
     state.Tasks.unshift(payload) // добавлення завдання в початок завдань
   },
   deleteTask(state, payload) {
+    console.log(state.Works.findIndex((e) => e.id_task === payload))
+
+    state.Works.splice(
+      state.Works.findIndex((e) => e.id_task === payload),
+      findLastIndex(state.Works, ['id_task', payload])
+    )
+
     state.Tasks.splice(
       state.Tasks.findIndex((e) => e.id === payload),
       1
     )
   },
   addWork(state, payload) {
-    state.Work.push(payload)
+    state.Works.push(payload)
   }
 }
 export const getters = {
@@ -24,7 +32,8 @@ export const getters = {
       result.push({ value: i.action })
     }
     return result
-  }
+  },
+  works: (state) => state.Works
 }
 export const actions = {
   async createTask({ commit }, payload) {
