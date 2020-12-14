@@ -39,8 +39,7 @@ export default {
 
       dataForm: {
         action: '',
-        measurement: '',
-        id: Math.floor(Math.random() * 999)
+        measurement: ''
       },
       roles: {
         measurement: [{ required: true, message: 'Заповніть буль-ласка поле' }],
@@ -57,8 +56,9 @@ export default {
             const DataForm = {
               action: this.dataForm.action,
               measurement: this.dataForm.measurement,
-              id: this.dataForm.id
+              id: Math.floor(Math.random() * 9999)
             }
+            this.$emit('idTask', this.dataForm.id)
             await this.$store.dispatch('createTask', DataForm)
           } catch (e) {
           } finally {

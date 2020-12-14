@@ -46,7 +46,7 @@ export default {
   },
   data() {
     return {
-      controler: { work: '', amount: 1 },
+      controler: { work: '', amount: 1, id: 0 },
       loadingValue: false
     }
   },
@@ -67,23 +67,24 @@ export default {
       }
     },
     handleSelect(item) {
-      console.log(item)
+      this.controler.id = item.id
     },
     add() {
       this.$refs.formAdd.validate(async (valid) => {
-        console.log(this.filterAdd())
         if (valid && this.typeTask.length > 0 && this.filterAdd() === true) {
           try {
             const dataAdd = {
-              work: this.controler.work,
               amount: this.controler.amount,
-              time: Date.now()
+              time: Date.now(),
+              id: this.controler.id
             }
-            console.log(dataAdd)
+
             await this.$store.dispatch('addWork', dataAdd)
           } catch (e) {
             console.log(e)
           } finally {
+            this.controler.work = ''
+            this.controler.amount = 0
           }
         }
       })

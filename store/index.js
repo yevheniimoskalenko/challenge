@@ -1,4 +1,4 @@
-import { findLastIndex } from 'lodash'
+import { remove } from 'lodash'
 export const state = () => ({
   Tasks: [],
   Works: []
@@ -8,13 +8,7 @@ export const mutations = {
     state.Tasks.unshift(payload) // добавлення завдання в початок завдань
   },
   deleteTask(state, payload) {
-    console.log(state.Works.findIndex((e) => e.id_task === payload))
-
-    state.Works.splice(
-      state.Works.findIndex((e) => e.id_task === payload),
-      findLastIndex(state.Works, ['id_task', payload])
-    )
-
+    remove(state.Works, ['id', payload])
     state.Tasks.splice(
       state.Tasks.findIndex((e) => e.id === payload),
       1
@@ -29,8 +23,9 @@ export const getters = {
   typeTask: (state) => {
     const result = []
     for (const i of state.Tasks) {
-      result.push({ value: i.action })
+      result.push({ value: i.action, id: i.id })
     }
+    console.log(result)
     return result
   },
   works: (state) => state.Works
