@@ -5,7 +5,9 @@
     <div v-if="tasks.length > 0">
       <app-task :tasks="tasks" />
     </div>
-    <app-diagram />
+    <div>
+      <app-diagram />
+    </div>
   </div>
 </template>
 
@@ -16,6 +18,9 @@ import appTask from '@/components/task.vue'
 import appDiagram from '@/components/diagram.vue'
 export default {
   components: { appCreateTask, appAddTask, appTask, appDiagram },
+  data() {
+    return {}
+  },
 
   computed: {
     tasks() {
@@ -25,6 +30,7 @@ export default {
       return this.$store.getters.typeTask
     }
   },
+  methods: {},
   head() {
     return {
       title: 'Виклик для самого себе!'

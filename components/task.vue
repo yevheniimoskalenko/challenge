@@ -12,6 +12,12 @@
           </div>
           <div class="task_delete">
             <el-button
+              type="primary"
+              icon="el-icon-s-data"
+              circle
+              @click="createDiagram(task.id)"
+            ></el-button>
+            <el-button
               type="danger"
               icon="el-icon-delete"
               circle
@@ -35,6 +41,9 @@ export default {
   methods: {
     async deleteTask(id) {
       await this.$store.dispatch('deleteTask', id)
+    },
+    createDiagram(id) {
+      this.$store.dispatch('createDiagram', id)
     }
   }
 }

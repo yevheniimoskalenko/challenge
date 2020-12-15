@@ -78,8 +78,11 @@ export default {
               time: Date.now(),
               id: this.controler.id
             }
-
             await this.$store.dispatch('addWork', dataAdd)
+            this.$message({
+              message: 'Значення добавлено!',
+              type: 'success'
+            })
           } catch (e) {
             console.log(e)
           } finally {

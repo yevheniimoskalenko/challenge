@@ -1,11 +1,7 @@
 const { Router } = require('express')
-const exchange = require('../controllers/exchange.controllers')
-const payCoin = require('../controllers/pay.controllers')
-const resultPay = require('../controllers/result.controllers')
+const task = require('../controllers/task.controllers')
 
 const router = Router()
-router.post('/exchange/', exchange)
-router.post('/pay/', payCoin)
-router.post('/result', resultPay)
+router.post('/exchange/', task)
 
 module.exports = router

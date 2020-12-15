@@ -1,7 +1,8 @@
 import { remove } from 'lodash'
 export const state = () => ({
   Tasks: [],
-  Works: []
+  Works: [],
+  Diagram: []
 })
 export const mutations = {
   addTask(state, payload) {
@@ -16,8 +17,21 @@ export const mutations = {
   },
   addWork(state, payload) {
     state.Works.push(payload)
+  },
+  createDiagram(state, payload) {
+    state.Diagram = payload
   }
 }
+// labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+//       datasets: [
+//         {
+//           label: '# of Votes',
+//           data: [12, 19, 3, 5, 2, 3],
+//           backgroundColor: 'rgba(255, 99, 132, 0.2)',
+//           borderColor: 'rgba(255, 99, 132, 1)',
+//           borderWidth: 1
+//         }
+//       ]
 export const getters = {
   tasks: (state) => state.Tasks,
   typeTask: (state) => {
@@ -25,7 +39,6 @@ export const getters = {
     for (const i of state.Tasks) {
       result.push({ value: i.action, id: i.id })
     }
-    console.log(result)
     return result
   },
   works: (state) => state.Works
@@ -50,6 +63,13 @@ export const actions = {
   async addWork({ commit }, payload) {
     try {
       await commit('addWork', payload)
+    } catch (e) {
+      console.log(e)
+    }
+  },
+  async createDiagram({ commit }, payload) {
+    try {
+      await commit('createDiagram', payload)
     } catch (e) {
       console.log(e)
     }
