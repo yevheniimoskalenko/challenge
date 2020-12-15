@@ -1,10 +1,6 @@
 const { Schema, model } = require('mongoose')
 
 const add = Schema({
-  typeAction: {
-    type: String,
-    required: true
-  },
   amount: {
     type: Number,
     required: true

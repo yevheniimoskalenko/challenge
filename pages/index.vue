@@ -30,6 +30,9 @@ export default {
       return this.$store.getters.typeTask
     }
   },
+  mounted() {
+    this.$store.dispatch('Tasks')
+  },
   methods: {},
   head() {
     return {

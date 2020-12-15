@@ -44,6 +44,7 @@ export default {
       required: true
     }
   },
+
   data() {
     return {
       controler: { work: '', amount: 1, id: 0 },
