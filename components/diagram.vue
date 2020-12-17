@@ -1,9 +1,11 @@
 <template>
   <div>
-    <div class="task_title">
-      <h2>Графік</h2>
+    <div>
+      <div class="task_title">
+        <h2 v-if="diagrams.datas">Графік</h2>
+      </div>
+      <canvas ref="canvas"></canvas>
     </div>
-    <canvas ref="canvas"></canvas>
   </div>
 </template>
 
@@ -11,33 +13,38 @@
 import { Line } from 'vue-chartjs'
 export default {
   extends: Line,
-  computed: {},
-  mounted() {
-    const data = {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-      datasets: [
-        {
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
-          backgroundColor: 'rgba(255, 99, 132, 0.2)',
-          borderColor: 'rgba(255, 99, 132, 1)',
-          borderWidth: 1
-        }
-      ]
+  computed: {
+    diagrams() {
+      return this.$store.getters.createDiagram
     }
-    const options = {
-      scales: {
-        yAxes: [
+  },
+  watch: {
+    diagrams(val, old) {
+      const data = {
+        labels: this.diagrams.labels,
+        datasets: [
           {
-            ticks: {
-              beginAtZero: true
-            }
+            label: this.diagrams.label,
+            data: this.diagrams.datas,
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1
           }
         ]
       }
+      const options = {
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true
+              }
+            }
+          ]
+        }
+      }
+      this.renderChart(data, options)
     }
-
-    this.renderChart(data, options)
   }
 }
 </script>

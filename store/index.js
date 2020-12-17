@@ -37,7 +37,8 @@ export const getters = {
     }
     return result
   },
-  works: (state) => state.Works
+  works: (state) => state.Works,
+  createDiagram: (state) => state.Diagram
 }
 export const actions = {
   async createTask({ commit }, payload) {
@@ -68,7 +69,9 @@ export const actions = {
   },
   async createDiagram({ commit }, payload) {
     try {
-      await commit('createDiagram', payload)
+      const result = await this.$axios.$get(`/api/findById/${payload}`)
+      console.log(result)
+      await commit('createDiagram', result)
     } catch (e) {
       console.log(e)
     }
