@@ -1,4 +1,5 @@
 const moment = require('moment')
+const _ = require('lodash')
 const Task = require('../model/task.model')
 const Add = require('../model/addValue.model')
 module.exports.task = async (req, res) => {
@@ -34,6 +35,5 @@ module.exports.findById = async (req, res) => {
   const allTime = data.reduce((acc, item) => {
     return acc.concat(moment(item.time).format('h:mm:ss a'))
   }, [])
-
   return res.json({ labels: allTime, datas: allData, label: label.action })
 }
