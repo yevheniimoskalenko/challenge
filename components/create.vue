@@ -23,7 +23,7 @@
             type="primary"
             plain
             @click="create"
-            >Стврити</el-button
+            >Створити</el-button
           >
         </div>
       </el-form>

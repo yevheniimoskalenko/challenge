@@ -12,7 +12,6 @@ module.exports.deleteTask = async (req, res) => {
   await Task.deleteOne({ _id: id })
   await Add.deleteMany({ id_task: id })
   return res.json(id)
-  // await Add.deleteMany({ id_task: id })
 }
 module.exports.allTasks = async (req, res) => {
   const allTasks = await Task.find()
@@ -29,20 +28,12 @@ module.exports.findById = async (req, res) => {
   const { id } = req.params
   const label = await Task.findById(id)
   const data = await Add.find({ id_task: id }, { __v: 0 })
-  const labels = []
-  const datas = []
-  for await (const item of data) {
-    labels.push(moment(item.time).format('h:mm:ss a'))
-    datas.push(item.amount)
-  }
-  // const s = await data.reduce(function(prev, curr) {
-  //   return [...prev, ...curr.amount]
-  // }, {})
+  const allData = data.reduce((acc, item) => {
+    return acc.concat(item.amount)
+  }, [])
+  const allTime = data.reduce((acc, item) => {
+    return acc.concat(moment(item.time).format('h:mm:ss a'))
+  }, [])
 
-  // console.log(s)
-  // console.log(
-  //   moment('2020-12-16T17:01:19.432Z').format('MMMM Do YYYY, h:mm:ss a')
-  // )
-  return res.json({ labels, datas, label: label.action })
-  // const date = []
+  return res.json({ labels: allTime, datas: allData, label: label.action })
 }
