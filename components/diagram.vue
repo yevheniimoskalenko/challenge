@@ -5,6 +5,9 @@
         <h2 v-if="diagrams.datas">Графік</h2>
       </div>
       <canvas ref="canvas"></canvas>
+      <div v-if="diagrams.datas" class="footer">
+        <el-button :loading="loading" @click="allLoad">Показати все</el-button>
+      </div>
     </div>
   </div>
 </template>
@@ -13,6 +16,9 @@
 import { Line } from 'vue-chartjs'
 export default {
   extends: Line,
+  data() {
+    return { loading: false }
+  },
   computed: {
     diagrams() {
       return this.$store.getters.createDiagram
@@ -26,8 +32,8 @@ export default {
           {
             label: this.diagrams.label,
             data: this.diagrams.datas,
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-            borderColor: 'rgba(255, 99, 132, 1)',
+            backgroundColor: this.diagrams.color,
+            borderColor: this.diagrams.color,
             borderWidth: 1
           }
         ]
@@ -45,8 +51,22 @@ export default {
       }
       this.renderChart(data, options)
     }
+  },
+  methods: {
+    async allLoad() {
+      try {
+        await this.$store.dispatch('allLoad')
+      } catch (e) {
+        console.log(e)
+      }
+    }
   }
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.footer {
+  display: flex;
+  justify-content: center;
+}
+</style>

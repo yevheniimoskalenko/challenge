@@ -8,6 +8,11 @@ const task = new Schema({
   typeAction: {
     type: String,
     required: true
+  },
+  color: {
+    type: String,
+    required: false,
+    default: '#409EFF'
   }
 })
 module.exports = model('task', task)

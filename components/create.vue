@@ -6,14 +6,23 @@
     <el-card>
       <el-form ref="form" :model="dataForm" :rules="roles">
         <el-row :gutter="20">
-          <el-col :span="12">
+          <el-col :span="10">
             <el-form-item label="Назва дії:" prop="action">
               <el-input v-model="dataForm.action" placeholder="Біг" />
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col :span="10">
             <el-form-item label="Тип вимірювання:" prop="measurement">
               <el-input v-model="dataForm.measurement" placeholder="Метри" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="4">
+            <el-form-item label="Колір">
+              <el-color-picker
+                v-model="dataForm.color"
+                show-alpha
+                color-format="rgb"
+              ></el-color-picker>
             </el-form-item>
           </el-col>
         </el-row>
@@ -39,7 +48,8 @@ export default {
 
       dataForm: {
         action: '',
-        measurement: ''
+        measurement: '',
+        color: null
       },
       roles: {
         measurement: [{ required: true, message: 'Заповніть буль-ласка поле' }],
@@ -56,9 +66,8 @@ export default {
             const DataForm = {
               action: this.dataForm.action,
               measurement: this.dataForm.measurement,
-              id: Math.floor(Math.random() * 9999)
+              color: this.dataForm.color
             }
-            this.$emit('idTask', this.dataForm.id)
             await this.$store.dispatch('createTask', DataForm)
           } catch (e) {
           } finally {

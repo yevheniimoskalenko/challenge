@@ -31,11 +31,12 @@ export const mutations = {
 export const getters = {
   tasks: (state) => state.Tasks,
   typeTask: (state) => {
-    const result = []
-    for (const i of state.Tasks) {
-      result.push({ value: i.action, id: i._id })
-    }
-    return result
+    return state.Tasks.reduce((acc, item) => {
+      return acc.concat({
+        value: item.action + ' ' + item.typeAction,
+        id: item._id
+      })
+    }, [])
   },
   works: (state) => state.Works,
   createDiagram: (state) => state.Diagram
@@ -70,7 +71,6 @@ export const actions = {
   async createDiagram({ commit }, payload) {
     try {
       const result = await this.$axios.$get(`/api/findById/${payload}`)
-      console.log(result)
       await commit('createDiagram', result)
     } catch (e) {
       console.log(e)
@@ -80,5 +80,10 @@ export const actions = {
     const tasks = await this.$axios.$get(`/api/tasks`)
     commit('loadTasks', tasks.allTasks)
     commit('loadWorks', tasks.allWork)
+  },
+  async allLoad({ commit }) {
+    try {
+      await console.log()
+    } catch (e) {}
   }
 }
