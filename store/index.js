@@ -2,11 +2,15 @@ import { remove } from 'lodash'
 export const state = () => ({
   Tasks: [],
   Works: [],
-  Diagram: []
+  Diagram: [],
+  AllLoad: []
 })
 export const mutations = {
   addTask(state, payload) {
     state.Tasks.unshift(payload) // добавлення завдання в початок завдань
+  },
+  allload(state, payload) {
+    state.AllLoad = payload
   },
   loadTasks(state, payload) {
     state.Tasks = payload
@@ -83,7 +87,8 @@ export const actions = {
   },
   async allLoad({ commit }) {
     try {
-      await console.log()
+      const load = await this.$axios.$get('/api/allLoad')
+      commit('allload', load)
     } catch (e) {}
   }
 }

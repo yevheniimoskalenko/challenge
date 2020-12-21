@@ -34,10 +34,16 @@ module.exports.findById = async (req, res) => {
   const allTime = data.reduce((acc, item) => {
     return acc.concat(moment(item.time).format('h:mm:ss a'))
   }, [])
+  const total = data.reduce((acc, item) => acc + item.amount, 0)
   return res.json({
     labels: allTime,
     datas: allData,
     label: label.action,
-    color: label.color
+    color: label.color,
+    total
   })
+}
+module.exports.allLoad = async (req, res) => {
+  const label = await Task.find()
+  console.log(label)
 }

@@ -6,7 +6,7 @@
       </div>
       <canvas ref="canvas"></canvas>
       <div v-if="diagrams.datas" class="footer">
-        <el-button :loading="loading" @click="allLoad">Показати все</el-button>
+        <!-- <el-button :loading="loading" @click="allLoad">Показати все</el-button> -->
       </div>
     </div>
   </div>
@@ -30,7 +30,7 @@ export default {
         labels: this.diagrams.labels,
         datasets: [
           {
-            label: this.diagrams.label,
+            label: this.diagrams.label + ' ' + this.diagrams.total,
             data: this.diagrams.datas,
             backgroundColor: this.diagrams.color,
             borderColor: this.diagrams.color,
